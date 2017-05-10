@@ -10,10 +10,10 @@ class PlayersController < ApplicationController
     @game = Game.last
   end
   @player = Player.create(player_params)
+  Board.generate_game(@player)
   @game.players << @player
   redirect_to "/battleship/#{@game.id}"
  end
-
 
  private
  def player_params
