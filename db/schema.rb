@@ -51,7 +51,6 @@ ActiveRecord::Schema.define(version: 20170510195240) do
   create_table "spaces", force: :cascade do |t|
     t.string   "status"
     t.string   "coordinate"
-    t.integer  "ship_id"
     t.integer  "board_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
