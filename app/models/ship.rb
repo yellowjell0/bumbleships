@@ -19,22 +19,22 @@ class Ship < ApplicationRecord
     @position = coordinates
   end
 
-  def can_place?(start_coordinates, direction)
-    possible_coordinates = create_ship_coordinates(start_coordinates, direction)
+  def can_place?(start_coordinate, direction)
+    possible_coordinates = create_ship_coordinates(start_coordinate, direction)
     check_if_valid?(possible_coordinates)
   end
 
-  def create_ship_coordinates(start_coordinates, direction)
-    coordinates = helper.parse_coordinate(start_coordinate)
+  def create_ship_coordinates(start_coordinate, direction)
+    coordinates = parse_coordinate(start_coordinate)
     possible_spaces =[]
     if direction == "up"
-      self.length.times{|i| possible_spaces << get_x(coordinates).to_s + (get_y(coordinates)-i).to_s}
+      self.length.times{|i| possible_spaces << "#{get_x(coordinates)}#{(get_y(coordinates)-i)}"}
     elsif direction == "down"
-      self.length.times{|i| possible_spaces << get_x(coordinates).to_s + (get_y(coordinates)+i).to_s}
+      self.length.times{|i| possible_spaces << "#{get_x(coordinates)}#{(get_y(coordinates)+i)}"}
     elsif direction == "left"
-      self.length.times{|i| possible_spaces << (get_x(coordinates)-i).to_s + get_y(coordinates).to_s}
+      self.length.times{|i| possible_spaces << "#{(get_x(coordinates)-i)}#{get_y(coordinates)}"}
     elsif direction == "right"
-      self.length.times{|i| possible_spaces << (get_x(coordinates)+i).to_s + get_y(coordinates).to_s}
+      self.length.times{|i| possible_spaces << "#{(get_x(coordinates)+i)}#{get_y(coordinates)}"}
     else
       "direction is not valid"
     end
