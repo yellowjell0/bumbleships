@@ -12,21 +12,34 @@ class Ship < ApplicationRecord
   end
 
   def position
-    @position ||= create_ship_coordinates(start_coordinate, direction)
+    @position ||= get_spaces_from_coordinates(start_coordinate, direction)
   end
 
   def position=(coordinates)
     @position = coordinates
   end
 
+  def sunk?
+    self.position.all? {|space| space.status == "hit"}
+  end
+
   def set_ship(start_coordinate, direction)
     if can_place?(start_coordinate, direction)
       self.start_coordinate = parse_coordinate(start_coordinate)
       self.direction = direction
-      @position = create_ship_coordinates(start_coordinate, direction)
+      @position = get_spaces_from_coordinates(start_coordinate, direction)
     else
       false
     end
+  end
+
+  def get_spaces_from_coordinates(start_coordinate, direction)
+    coordinates = create_ship_coordinates(start_coordinate, direction)
+    occupied_spaces = []
+    coordinates.each do |coordinate|
+      occupied_spaces << Space.find_by(coordinate: coordinate, board: self.player.board)
+    end
+    occupied_spaces
   end
 
   def can_place?(start_coordinate, direction)
