@@ -31,15 +31,26 @@ class Space < ApplicationRecord
     coordinates
   end
 
-  #Change status methods
-  #is_empty?
-  #has_shot?
-    #regardless of hit or miss so that user knows that it cannot choose it again
-  #has_ship?
-    #to check what its status will be once it has been hit
-  #get_shot
-    #depending on if it has_ship change status of space
-  #add_ship
-    #change status from empty to ship
+  def guessed?
+    (self.status == 'miss') || (self.status == 'hit')
+  end
+
+  def has_ship?
+    (self.status == 'ship') || (self.status == 'hit')
+  end
+
+  def receive_guess
+    if self.status == 'empty'
+      self.status = 'miss'
+    elsif self.status == 'ship'
+      self.status = 'hit'
+    end
+  end
+
+  def add_ship
+    if self.status == 'empty'
+      self.status = 'ship'
+    end
+  end
 
 end

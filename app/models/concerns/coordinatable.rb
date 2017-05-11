@@ -7,6 +7,14 @@ module Coordinatable
     parsed_coordinate = new_x + new_y.to_s
   end
 
+  def get_x(coordinate)
+    coordinate[0].to_i
+  end
+
+  def get_y(coordinate)
+    coordinate[1].to_i
+  end
+
   def check_if_valid?(possible_coordinates)
       in_bounds?(possible_coordinates) && spaces_available?(possible_coordinates)
   end
