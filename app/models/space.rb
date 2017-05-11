@@ -30,4 +30,27 @@ class Space < ApplicationRecord
     coordinates
   end
 
+  def guessed?
+    (self.status == 'miss') || (self.status == 'hit')
+  end
+
+  def has_ship?
+    (self.status == 'ship') || (self.status == 'hit')
+  end
+
+  def receive_guess
+    if self.status == 'empty'
+      self.status = 'miss'
+    elsif self.status == 'ship'
+      self.status = 'hit'
+    end
+  end
+
+  def add_ship
+    if self.status == 'empty'
+      self.status = 'ship'
+    end
+  end
+
+
 end
