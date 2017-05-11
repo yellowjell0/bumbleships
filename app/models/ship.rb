@@ -47,7 +47,7 @@ class Ship < ApplicationRecord
 
   def can_place?(start_coordinate, direction)
     directions = ["up", "down", "left", "right"]
-    if start_coordinate == 2 && directions.include?(direction)
+    if start_coordinate.length == 2 && directions.include?(direction)
       possible_coordinates = create_ship_coordinates(start_coordinate, direction)
       check_if_valid?(possible_coordinates)
     else
