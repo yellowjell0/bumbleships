@@ -10,7 +10,7 @@ class PlayersController < ApplicationController
     @game = Game.last
   end
   @player = Player.create(player_params)
-  Board.generate_game(@player)
+  Board.generate_player_game(@player)
   @game.players << @player
   @fleet = @player.ships
   render :'games/show'
