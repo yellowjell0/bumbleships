@@ -12,11 +12,21 @@ class Ship < ApplicationRecord
   end
 
   def position
-    @position = []
+    @position ||= create_ship_coordinates(start_coordinate, direction)
   end
 
   def position=(coordinates)
     @position = coordinates
+  end
+
+  def set_ship(start_coordinate, direction)
+    if can_place?(start_coordinate, direction)
+      self.start_coordinate = parse_coordinate(start_coordinate)
+      self.direction = direction
+      @position = create_ship_coordinates(start_coordinate, direction)
+    else
+      false
+    end
   end
 
   def can_place?(start_coordinate, direction)
