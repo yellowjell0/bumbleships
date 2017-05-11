@@ -32,31 +32,32 @@ class Space < ApplicationRecord
     coordinates
   end
 
-  def self.guessed?(user_coordinate)
-    p user_coordinate
-    p coordinate = parse_coordinate(user_coordinate)
-    space = Space.find_by(coordinate: parse_coordinate(user_coordinate))
+  def self.guessed?(user_coordinate, board)
+    space = self.find_by(coordinate: parse_coordinate(user_coordinate), board: board)
     (space.status == 'miss') || (space.status == 'hit')
   end
 
-  def self.has_ship?(user_coordinate)
-    space = self.find_by(coordinate: parse_coordinate(user_coordinate))
+  def self.has_ship?(user_coordinate, board)
+    space = self.find_by(coordinate: parse_coordinate(user_coordinate), board: board)
     (space.status == 'ship') || (space.status == 'hit')
   end
 
-  def self.receive_guess(user_coordinate)
-    space = self.find_by(coordinate: parse_coordinate(user_coordinate))
+  def self.receive_guess(user_coordinate, board)
+    space = self.find_by(coordinate: parse_coordinate(user_coordinate), board: board)
     if space.status == 'empty'
       space.status = 'miss'
+      space.save
     elsif space.status == 'ship'
       space.status = 'hit'
+      space.save
     end
   end
 
-  def self.add_ship(user_coordinate)
-    space = self.find_by(coordinate: parse_coordinate(user_coordinate))
+  def self.add_ship(user_coordinate, board)
+    space = self.find_by(coordinate: parse_coordinate(user_coordinate), board: board)
     if space.status == 'empty'
       space.status = 'ship'
+      space.save
     end
   end
 
