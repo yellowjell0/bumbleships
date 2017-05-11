@@ -9,4 +9,17 @@ class Ship < ApplicationRecord
     end
     fleet
   end
+
+
+
+
+
+
+
+
+
+
+
+
+  
 end

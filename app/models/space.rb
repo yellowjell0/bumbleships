@@ -52,13 +52,5 @@ class Space < ApplicationRecord
     end
   end
 
-  def get_x
-    self.coordinate[0].to_i
-  end
-
-  def get_y
-    self.coordinate[1].to_i
-  end
-
 
 end
