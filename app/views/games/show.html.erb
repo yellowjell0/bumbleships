@@ -1,0 +1,10 @@
+<h1>Deploy your fleet!</h1>
+<% @fleet.each do |ship| %>
+  <%= form_for ship, url: '/place_ship' do |f| %>
+  Start coordinate for Ship of size <%= ship.length %>
+  <%= f.text_field :start_coordinate %>
+  Direction [up, down, left, right]
+  <%= f.text_field :direction %>
+  <%= f.submit %>
+<% end %>
+<% end %>

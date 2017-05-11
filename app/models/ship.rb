@@ -1,4 +1,5 @@
 class Ship < ApplicationRecord
+  include Coordinatable
   belongs_to :player
 
   def self.create_fleet(player)
@@ -10,16 +11,44 @@ class Ship < ApplicationRecord
     fleet
   end
 
+  def position
+    @position ||= create_ship_coordinates(start_coordinate, direction)
+  end
 
+  def position=(coordinates)
+    @position = coordinates
+  end
 
+  def set_ship(start_coordinate, direction)
+    if can_place?(start_coordinate, direction)
+      self.start_coordinate = parse_coordinate(start_coordinate)
+      self.direction = direction
+      @position = create_ship_coordinates(start_coordinate, direction)
+    else
+      false
+    end
+  end
 
+  def can_place?(start_coordinate, direction)
+    possible_coordinates = create_ship_coordinates(start_coordinate, direction)
+    check_if_valid?(possible_coordinates)
+  end
 
+  def create_ship_coordinates(start_coordinate, direction)
+    coordinates = parse_coordinate(start_coordinate)
+    possible_spaces =[]
+    if direction == "up"
+      self.length.times{|i| possible_spaces << "#{get_x(coordinates)}#{(get_y(coordinates)-i)}"}
+    elsif direction == "down"
+      self.length.times{|i| possible_spaces << "#{get_x(coordinates)}#{(get_y(coordinates)+i)}"}
+    elsif direction == "left"
+      self.length.times{|i| possible_spaces << "#{(get_x(coordinates)-i)}#{get_y(coordinates)}"}
+    elsif direction == "right"
+      self.length.times{|i| possible_spaces << "#{(get_x(coordinates)+i)}#{get_y(coordinates)}"}
+    else
+      "direction is not valid"
+    end
+    possible_spaces
+  end
 
-
-
-
-
-
-
-  
 end

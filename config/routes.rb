@@ -3,4 +3,5 @@ Rails.application.routes.draw do
 get '/', to: "players#index"
 post '/players', to: "players#create"
 get '/battleship/:id', to: "games#show"
+post '/place_ship', to: "games#place_ship"
 end
