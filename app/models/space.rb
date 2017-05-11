@@ -1,4 +1,5 @@
 class Space < ApplicationRecord
+  extend Coordinatable
   belongs_to :board
 
   validate :status_is_valid
@@ -31,25 +32,31 @@ class Space < ApplicationRecord
     coordinates
   end
 
-  def guessed?
-    (self.status == 'miss') || (self.status == 'hit')
+  def self.guessed?(user_coordinate)
+    p user_coordinate
+    p coordinate = parse_coordinate(user_coordinate)
+    space = Space.find_by(coordinate: parse_coordinate(user_coordinate))
+    (space.status == 'miss') || (space.status == 'hit')
   end
 
-  def has_ship?
-    (self.status == 'ship') || (self.status == 'hit')
+  def self.has_ship?(user_coordinate)
+    space = self.find_by(coordinate: parse_coordinate(user_coordinate))
+    (space.status == 'ship') || (space.status == 'hit')
   end
 
-  def receive_guess
-    if self.status == 'empty'
-      self.status = 'miss'
-    elsif self.status == 'ship'
-      self.status = 'hit'
+  def self.receive_guess(user_coordinate)
+    space = self.find_by(coordinate: parse_coordinate(user_coordinate))
+    if space.status == 'empty'
+      space.status = 'miss'
+    elsif space.status == 'ship'
+      space.status = 'hit'
     end
   end
 
-  def add_ship
-    if self.status == 'empty'
-      self.status = 'ship'
+  def self.add_ship(user_coordinate)
+    space = self.find_by(coordinate: parse_coordinate(user_coordinate))
+    if space.status == 'empty'
+      space.status = 'ship'
     end
   end
 
