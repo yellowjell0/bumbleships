@@ -13,3 +13,41 @@
  *= require_tree .
  *= require_self
  */
+.block{
+  background-color: blue;
+  border: 3px solid black;
+}
+
+
+.bottom .block{
+  background-color: blue;
+}
+
+
+.hit-block{
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+    background-color: red;
+}
+
+.miss-block{
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+    background-color: grey;
+}
+
+.empty-block{
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+    background-color: blue;
+}
+
+.ship-block{
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+    background-color: grey;
+}
