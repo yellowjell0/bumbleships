@@ -52,11 +52,11 @@ class Space < ApplicationRecord
     end
   end
 
-  def x_coordinate
+  def get_x
     self.coordinate[0].to_i
   end
 
-  def y_coordinate
+  def get_y
     self.coordinate[1].to_i
   end
 
