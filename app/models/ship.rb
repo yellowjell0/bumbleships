@@ -37,14 +37,22 @@ class Ship < ApplicationRecord
     coordinates = create_ship_coordinates(start_coordinate, direction)
     occupied_spaces = []
     coordinates.each do |coordinate|
-      occupied_spaces << Space.find_by(coordinate: coordinate, board: self.player.board)
+      space = Space.find_by(coordinate: coordinate, board: self.player.board)
+      space.status = "ship"
+      space.save
+      occupied_spaces << space
     end
     occupied_spaces
   end
 
   def can_place?(start_coordinate, direction)
-    possible_coordinates = create_ship_coordinates(start_coordinate, direction)
-    check_if_valid?(possible_coordinates)
+    directions = ["up", "down", "left", "right"]
+    if start_coordinate.length == 2 && directions.include?(direction)
+      possible_coordinates = create_ship_coordinates(start_coordinate, direction)
+      check_if_valid?(possible_coordinates)
+    else
+      false
+    end
   end
 
   def create_ship_coordinates(start_coordinate, direction)

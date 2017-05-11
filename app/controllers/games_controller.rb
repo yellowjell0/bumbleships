@@ -1,11 +1,22 @@
 class GamesController < ApplicationController
 
-def create
-  ship = Ship.find(params[:id])
-  ship.place_ship(space_params)
-end
+  def index
 
-def space_params
+  end
 
-end
+  def create
+    if Game.all.size == 0 || Game.last.players.count == 2
+      @game = Game.create
+    else
+      @game = Game.last
+    end
+      @player = Player.create(player_params)
+    Board.generate_player_game(@player)
+    @game.players << @player
+    redirect_to set_fleet_player_path(@player)
+  end
+
+  def player_params
+    params.require(:player).permit(:username)
+  end
 end
