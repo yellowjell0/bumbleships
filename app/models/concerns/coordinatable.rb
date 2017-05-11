@@ -26,7 +26,7 @@ module Coordinatable
 
   def spaces_available?(possible_coordinates)
     possible_coordinates.all? do |coordinate|
-      space = Space.find_by(coordinate: coordinate)
+      space = Space.find_by(coordinate: coordinate, board: self.player.board)
       space.status == "empty"
     end
   end
