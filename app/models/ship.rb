@@ -37,7 +37,10 @@ class Ship < ApplicationRecord
     coordinates = create_ship_coordinates(start_coordinate, direction)
     occupied_spaces = []
     coordinates.each do |coordinate|
-      occupied_spaces << Space.find_by(coordinate: coordinate, board: self.player.board)
+      space = Space.find_by(coordinate: coordinate, board: self.player.board)
+      space.status = "ship"
+      space.save
+      occupied_spaces << space
     end
     occupied_spaces
   end

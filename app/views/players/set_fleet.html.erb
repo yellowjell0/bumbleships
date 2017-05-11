@@ -1,0 +1,24 @@
+<h1>Deploy your fleet!</h1>
+<% if @error %>
+  <%= @error %>
+<% end %>
+<% @player.ships.each do |ship| %>
+ <% if ship.start_coordinate == nil %>
+    <%= form_for :ship, url: "/players/#{@player.id}/add_ship", method: :patch do |f| %>
+    <%= f.hidden_field :ship_id, :value => ship.id %>
+    Start coordinate for Ship of size <%= ship.length %>
+    <%= f.text_field :start_coordinate %>
+    Direction [up, down, left, right]
+    <%= f.text_field :direction %>
+    <%= f.submit %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<h2>something else</h2>
+<% @player.ships.each do |ship| %>
+  <%= ship.start_coordinate %>
+  <%= ship.direction %>
+<% end %>
+
+
