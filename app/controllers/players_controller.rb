@@ -12,7 +12,8 @@ class PlayersController < ApplicationController
   @player = Player.create(player_params)
   Board.generate_game(@player)
   @game.players << @player
-  redirect_to "/battleship/#{@game.id}"
+  @fleet = @player.ships
+  render :'games/show'
  end
 
  private

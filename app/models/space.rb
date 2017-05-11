@@ -9,7 +9,7 @@ class Space < ApplicationRecord
       errors.add(:status, 'invalid status, try [empty, ship, miss,hit]')
     end
   end
-
+  #move this to the initialize method of board???
   def self.create_spaces(board)
     status = "empty"
     coordinates = self.coordinate_helper
@@ -19,6 +19,7 @@ class Space < ApplicationRecord
     end
   end
 
+  #move this to board.spaces each then add coordinates to that?
   def self.coordinate_helper
     nums = (0..9).to_a
     coordinates = []
@@ -29,5 +30,16 @@ class Space < ApplicationRecord
     end
     coordinates
   end
+
+  #Change status methods
+  #is_empty?
+  #has_shot?
+    #regardless of hit or miss so that user knows that it cannot choose it again
+  #has_ship?
+    #to check what its status will be once it has been hit
+  #get_shot
+    #depending on if it has_ship change status of space
+  #add_ship
+    #change status from empty to ship
 
 end
