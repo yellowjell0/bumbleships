@@ -3,7 +3,10 @@ class GamesController < ApplicationController
   def index
 
   end
-
+  def show
+    @game = Game.find(params[:id])
+    @player = @game.players.first
+  end
   def create
     if Game.all.size == 0 || Game.last.players.count == 2
       @game = Game.create
