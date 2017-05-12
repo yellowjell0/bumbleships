@@ -8,11 +8,11 @@ $(document).ready(function(){
   var thing = $('body').find('table')[1]
   $(thing).removeClass('n').addClass('bottom')
   $(thing).siblings('h1').text('Opponent Table')
-  debugger;
+
   $('.n').find('.block').removeClass('overlay')
 
   $('.bottom').on('click','.block',function(){
-        $(this).closest('tbody').find('.selected').removeClass('selected')
+    $(this).closest('tbody').find('.selected').removeClass('selected')
     $(this).addClass('selected')
 
     var first_num = $(this).attr("class").split("")[0];
@@ -28,9 +28,11 @@ $(document).ready(function(){
 
 
     if(block.attr('class').split(' ')[1] == 'empty'){
+      block.removeClass('overlay')
       block.removeClass('empty').addClass('miss');
     }
     if(block.attr('class').split(' ')[1] == 'ship'){
+       block.removeClass('overlay')
       block.removeClass('ship').addClass('hit');
     }
   })
