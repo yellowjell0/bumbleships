@@ -1,6 +1,7 @@
-class PlayersController < ApplicationController
+ class PlayersController < ApplicationController
  def index
   @player = Player.new
+
  end
 
  def create
@@ -12,6 +13,7 @@ class PlayersController < ApplicationController
   @player = Player.create(player_params)
   Board.generate_player_game(@player)
   @game.players << @player
+
   @fleet = @player.ships
   render :'games/show'
  end
