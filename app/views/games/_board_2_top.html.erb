@@ -1,9 +1,9 @@
 <section>
-<table>
-  <% n = 0 %>
+<table class='n'>
+  <%n = 0 %>
   <tr >
     <% 11.times do |i| %>
-    <td class="coordinates"><% if i != 0 %><%= i-1 %><% end %></td>
+    <td class="coordinates"><% if i != 0 %><%= i %><% end %></td>
     <% end %>
   </tr>
   <% letters = ("A".."J").to_a %>
