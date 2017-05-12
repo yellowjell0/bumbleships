@@ -5,14 +5,12 @@
 //= require_tree .
 $(document).ready(function(){
 
-////Click a button and set the desired block to hit or miss. need some logic to teel if the class is a ship or not.
-// if a ship is hit change the class to hit
-// might need some ajax later once routes are ready
-/// need to have the block id that will be shot at
+  var thing = $('body').find('table')[1]
+  $(thing).removeClass('n').addClass('bottom')
+  $(thing).siblings('h1').text('Opponent Table')
 
-  $('.block').on('click',function(){
-
-    $(this).closest('tbody').find('.selected').removeClass('selected')
+  $('.bottom').on('click','.block',function(){
+        $(this).closest('tbody').find('.selected').removeClass('selected')
     $(this).addClass('selected')
 
     var first_num = $(this).attr("class").split("")[0];

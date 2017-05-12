@@ -1,0 +1,16 @@
+<section>
+<%# gets all the spaces from the current player %>
+<%= render template: '/games/_board_2_top', locals: {spaces: @player.spaces.order(:coordinate)} %>
+<%#Gets all the spaces from the opponent player %>
+<%= render template: '/games/_board_2_top', locals: {spaces: @player.attack_spaces.order(:coordinate)} %>
+
+
+
+
+<form class="fire-button">
+  <label>Coordinates:</label>
+  <input type="text" value="">
+  <button type="submit" class="fire-button">Fire</button>
+</form>
+
+</section>
