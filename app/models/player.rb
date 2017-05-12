@@ -7,18 +7,18 @@ class Player < ApplicationRecord
   has_one :game, foreign_key: :winner_id
 
   def attack_spaces
-    game = self.game
+    game = self.games.last
     other_player = nil
     game.players.each do |player|
       if player != self
         other_player = player
       end
     end
-    other_player.board.spaces
+    other_player.spaces
   end
 
   def attack_ships
-    game = self.game
+    game = self.games.last
     other_player = nil
     game.players.each do |player|
       if player != self
