@@ -24,6 +24,7 @@ class Ship < ApplicationRecord
   end
 
   def set_ship(start_coordinate, direction)
+    start_coordinate = parse_coordinate(start_coordinate)
     if can_place?(start_coordinate, direction)
       self.start_coordinate = parse_coordinate(start_coordinate)
       self.direction = direction
@@ -47,7 +48,7 @@ class Ship < ApplicationRecord
 
   def can_place?(start_coordinate, direction)
     directions = ["up", "down", "left", "right"]
-    if start_coordinate.length == 2 && directions.include?(direction)
+    if directions.include?(direction) && start_coordinate.length == 2
       possible_coordinates = create_ship_coordinates(start_coordinate, direction)
       check_if_valid?(possible_coordinates)
     else
@@ -56,7 +57,7 @@ class Ship < ApplicationRecord
   end
 
   def create_ship_coordinates(start_coordinate, direction)
-    coordinates = parse_coordinate(start_coordinate)
+    coordinates = start_coordinate
     possible_spaces =[]
     if direction == "right"
       self.length.times{|i| possible_spaces << "#{get_x(coordinates)}#{(get_y(coordinates)+i)}"}
@@ -64,7 +65,7 @@ class Ship < ApplicationRecord
       self.length.times{|i| possible_spaces << "#{get_x(coordinates)}#{(get_y(coordinates)-i)}"}
     elsif direction == "up"
       self.length.times{|i| possible_spaces << "#{(get_x(coordinates)-i)}#{get_y(coordinates)}"}
-    elsif direction == "down" #works
+    elsif direction == "down"
       self.length.times{|i| possible_spaces << "#{(get_x(coordinates)+i)}#{get_y(coordinates)}"}
     else
       "direction is not valid"
