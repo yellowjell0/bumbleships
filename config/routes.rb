@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   #
   get '/', to: "games#index"
   post '/games', to:"games#create"
-  get '/games/:id', to: "game#show", as: :game
-  # get '/games/:game_id/player/:id', to: "players#set_fleet", as: :set_fleet
+  get '/games/:id', to: "games#show", as: :game
+  get '/games/:id/statistics', to: "games#statistics", as: :statistics
     resources :players, only: [] do
       get :set_fleet, on: :member
       patch :add_ship, on: :member
