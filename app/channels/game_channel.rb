@@ -8,7 +8,7 @@ class GameChannel < ApplicationCable::Channel
   end
 
   def message(data)
-   k ActionCable.server.broadcast "game_channel", message: data['message']
+    ActionCable.server.broadcast "game_channel", message: data['message']
 
   end
 end

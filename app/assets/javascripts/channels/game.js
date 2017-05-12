@@ -21,7 +21,7 @@ App.game = App.cable.subscriptions.create("GameChannel", {
     }
     },
     message: function(message) {
-      return this.perform('message', message: message)
+      return this.perform(message)
 
     }
   });
