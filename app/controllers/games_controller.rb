@@ -19,4 +19,8 @@ class GamesController < ApplicationController
   def player_params
     params.require(:player).permit(:username)
   end
+
+  def statistics
+    @game = Game.find(params[:id])
+  end
 end

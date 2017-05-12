@@ -1,0 +1,15 @@
+<h1> Statistics </h1>
+<strong>Winner: <%= @game.winner.username %> </strong> vs. <%= @game.loser.username %><br>
+
+<% @game.players.each do |player| %>
+<%= player.username %>
+Ships standing at the end: <%= player.ships.where(:sunk => false).count %><br>
+Guesses: <%= player.attack_spaces.where(:status => "empty").count %><br>
+Accurate guesses: <%= player.attack_spaces.where(:status => "hit").count %><br>
+Missed guesses: <%= player.attack_spaces.where(:status => "miss").count %><br>
+Hits received: <%= player.spaces.where(:status => "hit").count %><br>
+Ships sunk: <%= player.attack_ships.where(:sunk => "true").count %><br><br>
+<% end %>
+
+
+

@@ -1,19 +1,60 @@
-<h1>bla </h1>
+<section>
+<h1>Your Board </h1>
 <table>
   <%n = 0 %>
+  <%letter = 'a'%>
+  <% num = 0 %>
   <% spaces.each do |space| %>
 
   <% if n == 0 %>
-   <tr>
-  <% end %>
-    <td class="<%=space.coordinate %> <%= space.status %>-block"></td>
+  <tr >
+    <%= num += 1 %>
+  </tr>
+  <tr>
+    <% end %>
+    <td class="<%=space.coordinate %> <%= space.status %> block"></td>
     <% if n == 9 %>
-    </tr>
+  </tr>
   <%end%>
   <% if n < 9 %>
-    <% n+= 1%>
+  <% n+= 1%>
   <%else %>
-    <% n = 0 %>
+  <% n = 0 %>
   <%end %>
   <%end %>
 </table>
+
+
+<h1>Opponent Board </h1>
+<label>Click block to select coordinate, then hit fire</label>
+<table class="bottom">
+  <%n = 0 %>
+  <%letter = 'a'%>
+  <% num = 0 %>
+  <% spaces.each do |space| %>
+
+  <% if n == 0 %>
+  <tr >
+    <%= num += 1 %>
+  </tr>
+  <tr>
+    <% end %>
+    <td class="<%=space.coordinate %> <%= space.status %> block"></td>
+    <% if n == 9 %>
+  </tr>
+  <%end%>
+  <% if n < 9 %>
+  <% n+= 1%>
+  <%else %>
+  <% n = 0 %>
+  <%end %>
+  <%end %>
+</table>
+
+<form class="fire-button">
+  <label>Coordinates:</label>
+  <input type="text" value="">
+  <button type="submit" class="fire-button">Fire</button>
+</form>
+
+</section>
