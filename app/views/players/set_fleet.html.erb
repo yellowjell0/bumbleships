@@ -21,4 +21,5 @@
   <%= ship.direction %>
 <% end %>
 
+<%= render template: '/games/_board_2_top', locals: {spaces: @player.board.spaces.order(:coordinate)} %>
 
