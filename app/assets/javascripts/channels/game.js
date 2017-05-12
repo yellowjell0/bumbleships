@@ -1,6 +1,15 @@
+
 App.game = App.cable.subscriptions.create("GameChannel", {
   connected: function(data) {
-    return $('#status').html("Waiting for an other payer.");
+    var numberOfPlayers = $('#subscribed').data('players');
+    switch(numberOfPlayers) {
+      case 1:
+        return $('#status').html("Waiting for an other payer.");
+        break;
+      case 2:
+        return $('#status').html("Ready to begin.");
+        break;
+    }
   },
   disconnected: function() {
     return $('#status').html("You have been disconnected.")
@@ -12,15 +21,18 @@ App.game = App.cable.subscriptions.create("GameChannel", {
     }
     },
     message: function(message) {
-      console.log(message)
+      return this.perform('message', message: message)
+
     }
   });
 
-// $(document).ready(function() {
-//   event.preventDefault
-//   $('#game').on('submit', function(event) {
-//     App.message(this);
-//  });
-// })
+$(document).ready(function() {
+  event.preventDefault
+  $('#game').on('submit', function(event) {
+    var input = $(this).children('input').val();
+    App.game.message(input);
+ });
+})
+
 
 

@@ -1,7 +1,6 @@
 class GameChannel < ApplicationCable::Channel
   def subscribed
     stream_from "player_#{uuid}"
-    # Seek.create(uuid)
   end
 
   def unsubscribed
@@ -9,6 +8,7 @@ class GameChannel < ApplicationCable::Channel
   end
 
   def message(data)
+   k ActionCable.server.broadcast "game_channel", message: data['message']
 
   end
 end

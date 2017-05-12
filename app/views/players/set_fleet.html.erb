@@ -1,4 +1,6 @@
 <h1>Deploy your fleet!</h1>
+<div id="status"></div>
+<div id="subscribed" data-players="<%=Seek.number_of_subcribers%>" > </div>
 <% if @error %>
   <%= @error %>
 <% end %>
@@ -22,4 +24,10 @@
 <% end %>
 
 <%= render template: '/games/_board_2_top', locals: {spaces: @player.board.spaces.order(:coordinate)} %>
+
+<form id="game">
+  <label>Enter Info</label>
+  <input type="text" name="text">
+</form>
+
 
