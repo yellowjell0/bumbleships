@@ -1,24 +1,27 @@
 <section>
-<h1>Your Board </h1>
 <table class='n'>
   <%n = 0 %>
-  <%letter = 'a'%>
-  <% num = 0 %>
+  <tr >
+    <% 11.times do |i| %>
+    <td class="coordinates"><% if i != 0 %><%= i %><% end %></td>
+    <% end %>
+  </tr>
+  <% letters = ("A".."J").to_a %>
+  <% letter_counter = 0 %>
   <% spaces.each do |space| %>
   <% if n == 0 %>
-  <tr >
-    <%= num += 1 %>
-  </tr>
   <tr>
+    <td class= "coordinates"><%= letters[letter_counter]%></td>
+    <% letter_counter += 1 %>
     <% end %>
-    <td class="<%=space.coordinate %> <%= space.status %> block overlay"></td>
+    <td class="<%=space.coordinate %> <%= space.status %> block"></td>
     <% if n == 9 %>
   </tr>
-  <%end%>
-  <% if n < 9 %>
-  <% n+= 1%>
-  <%else %>
-  <% n = 0 %>
-  <%end %>
-  <%end %>
+    <%end%>
+    <% if n < 9 %>
+    <% n+= 1%>
+    <%else %>
+    <% n = 0 %>
+    <%end %>
+    <%end %>
 </table>
