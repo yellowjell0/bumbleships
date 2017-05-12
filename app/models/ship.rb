@@ -58,13 +58,13 @@ class Ship < ApplicationRecord
   def create_ship_coordinates(start_coordinate, direction)
     coordinates = parse_coordinate(start_coordinate)
     possible_spaces =[]
-    if direction == "up"
-      self.length.times{|i| possible_spaces << "#{get_x(coordinates)}#{(get_y(coordinates)-i)}"}
-    elsif direction == "down"
+    if direction == "right"
       self.length.times{|i| possible_spaces << "#{get_x(coordinates)}#{(get_y(coordinates)+i)}"}
     elsif direction == "left"
+      self.length.times{|i| possible_spaces << "#{get_x(coordinates)}#{(get_y(coordinates)-i)}"}
+    elsif direction == "up"
       self.length.times{|i| possible_spaces << "#{(get_x(coordinates)-i)}#{get_y(coordinates)}"}
-    elsif direction == "right"
+    elsif direction == "down" #works
       self.length.times{|i| possible_spaces << "#{(get_x(coordinates)+i)}#{get_y(coordinates)}"}
     else
       "direction is not valid"
