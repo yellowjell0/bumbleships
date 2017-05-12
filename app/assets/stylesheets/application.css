@@ -39,3 +39,8 @@
 .selected{
     border: 3px solid red;
 }
+.overlay {
+    background-color :blue;
+    overflow:visible;
+    pointer-events:none;
+}

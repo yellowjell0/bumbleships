@@ -8,6 +8,8 @@ $(document).ready(function(){
   var thing = $('body').find('table')[1]
   $(thing).removeClass('n').addClass('bottom')
   $(thing).siblings('h1').text('Opponent Table')
+  debugger;
+  $('.n').find('.block').removeClass('overlay')
 
   $('.bottom').on('click','.block',function(){
         $(this).closest('tbody').find('.selected').removeClass('selected')
