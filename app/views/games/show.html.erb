@@ -1,6 +1,8 @@
 <section>
 <%# gets all the spaces from the current player %>
+<h2>Your Board</h2>
 <%= render template: '/games/_board_2_top', locals: {spaces: @player.spaces.order(:coordinate)} %>
+<h2>Opponent Board</h2>
 <%#Gets all the spaces from the opponent player %>
 <%= render template: '/games/_board_2_top', locals: {spaces: @player.attack_spaces.order(:coordinate)} %>
 
