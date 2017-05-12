@@ -24,6 +24,7 @@ class Ship < ApplicationRecord
   end
 
   def set_ship(start_coordinate, direction)
+    start_coordinate = parse_coordinate(start_coordinate)
     if can_place?(start_coordinate, direction)
       self.start_coordinate = parse_coordinate(start_coordinate)
       self.direction = direction
@@ -37,26 +38,34 @@ class Ship < ApplicationRecord
     coordinates = create_ship_coordinates(start_coordinate, direction)
     occupied_spaces = []
     coordinates.each do |coordinate|
-      occupied_spaces << Space.find_by(coordinate: coordinate, board: self.player.board)
+      space = Space.find_by(coordinate: coordinate, board: self.player.board)
+      space.status = "ship"
+      space.save
+      occupied_spaces << space
     end
     occupied_spaces
   end
 
   def can_place?(start_coordinate, direction)
-    possible_coordinates = create_ship_coordinates(start_coordinate, direction)
-    check_if_valid?(possible_coordinates)
+    directions = ["up", "down", "left", "right"]
+    if directions.include?(direction) && start_coordinate.length == 2
+      possible_coordinates = create_ship_coordinates(start_coordinate, direction)
+      check_if_valid?(possible_coordinates)
+    else
+      false
+    end
   end
 
   def create_ship_coordinates(start_coordinate, direction)
-    coordinates = parse_coordinate(start_coordinate)
+    coordinates = start_coordinate
     possible_spaces =[]
-    if direction == "up"
-      self.length.times{|i| possible_spaces << "#{get_x(coordinates)}#{(get_y(coordinates)-i)}"}
-    elsif direction == "down"
+    if direction == "right"
       self.length.times{|i| possible_spaces << "#{get_x(coordinates)}#{(get_y(coordinates)+i)}"}
     elsif direction == "left"
+      self.length.times{|i| possible_spaces << "#{get_x(coordinates)}#{(get_y(coordinates)-i)}"}
+    elsif direction == "up"
       self.length.times{|i| possible_spaces << "#{(get_x(coordinates)-i)}#{get_y(coordinates)}"}
-    elsif direction == "right"
+    elsif direction == "down"
       self.length.times{|i| possible_spaces << "#{(get_x(coordinates)+i)}#{get_y(coordinates)}"}
     else
       "direction is not valid"

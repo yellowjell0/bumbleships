@@ -5,7 +5,7 @@ class GameChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
-    Seek.remove(uuid)
+
   end
 
   def message(data)
