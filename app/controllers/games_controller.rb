@@ -6,6 +6,10 @@ class GamesController < ApplicationController
   def show
     @game = Game.find(params[:id])
     @player = @game.players.last
+    ActionCable.server.broadcast 'game channel',
+                            game: @game,
+                            player_id: @player.id,
+                            board: render_board(@player)
   end
   def create
 
@@ -30,5 +34,9 @@ end
 
   def statistics
     @game = Game.find(params[:id])
+  end
+
+  def render_board(player)
+    render partial: 'board_2_top', locals: {spaces: player.spaces.order(:coordinate)}
   end
 end

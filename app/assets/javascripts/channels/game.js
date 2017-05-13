@@ -20,7 +20,7 @@ App.game = App.cable.subscriptions.create("GameChannel", {
     return $('#status').html("You have been disconnected.")
   },
   received: function(data) {
-      return this.perform(data)
+      alert(data)
   //     if (data.action === 'game start') {
   // // Put board logic here
   //       return $('#status').html("Game started! You play as #{data.msg}.")
