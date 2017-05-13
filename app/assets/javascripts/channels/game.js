@@ -21,22 +21,12 @@ App.game = App.cable.subscriptions.create("GameChannel", {
   },
   received: function(data) {
       alert(data)
-  //     if (data.action === 'game start') {
-  // // Put board logic here
-  //       return $('#status').html("Game started! You play as #{data.msg}.")
+      // board logic goes here
+
     },
-    message: function(message) {
-      return this.perform(message)
-    }
+
   });
 
-$(document).ready(function(event) {
-  event.preventDefault
-  $('.fire-button-button').on('submit', function(event) {
-    var id = $(this).attr("id");
-    App.game.message(id);
- });
-});
 
 
 
