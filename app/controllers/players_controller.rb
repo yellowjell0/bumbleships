@@ -20,6 +20,12 @@
   end
  end
 
+ def guess
+   player = Player.find(params[:id])
+
+   Space.receive_guess(params[:coordinates],player)
+ end
+
  private
  def player_params
   params.require(:player).permit(:username)

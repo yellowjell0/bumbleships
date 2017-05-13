@@ -16,13 +16,7 @@
     <% end %>
   <% end %>
 <% end %>
-
-<h2>something else</h2>
-<% @player.ships.each do |ship| %>
-  <%= ship.start_coordinate %>
-  <%= ship.direction %>
-<% end %>
-
+<h1> Your Board </h1>
 <%= render template: '/games/_board_2_top', locals: {spaces: @player.board.spaces.order(:coordinate)} %>
 
 

@@ -41,14 +41,16 @@ class Space < ApplicationRecord
     (space.status == 'ship') || (space.status == 'hit')
   end
 
-  def self.receive_guess(user_coordinate, board)
-    space = self.find_by(coordinate: parse_coordinate(user_coordinate), board: board)
-    if space.status == 'empty'
-      space.status = 'miss'
-      space.save
-    elsif space.status == 'ship'
-      space.status = 'hit'
-      space.save
+  def self.receive_guess(user_coordinate, player)
+  space = player.attack_spaces.where(coordinate: user_coordinate)
+    # space = self.find_by(coordinate: user_coordinate, board: board)
+
+    if space[0].status == 'empty'
+      space[0].status = 'miss'
+      space[0].save
+    elsif space[0].status == 'ship'
+      space[0].status = 'hit'
+      space[0].save
     end
   end
 

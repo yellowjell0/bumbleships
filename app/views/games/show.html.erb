@@ -14,3 +14,22 @@ Direction [up, down, left, right]
 
 </div>
 
+<section>
+<%# gets all the spaces from the current player %>
+<h2>Your Board</h2>
+<%= render template: '/games/_board_2_top', locals: {spaces: @player.spaces.order(:coordinate)} %>
+<h2>Opponent Board</h2>
+<%#Gets all the spaces from the opponent player %>
+<%= render template: '/games/_board_2_top', locals: {spaces: @player.attack_spaces.order(:coordinate)} %>
+
+
+
+
+<form class="fire-button" method="post" action='/players/<%=@player.id%>/guess'>
+  <label>Coordinates:</label>
+  <input type="hidden" name="_method" value="patch">
+  <input type="text" name="coordinates" value="">
+  <button type="submit" class="fire-button">Fire</button>
+</form>
+
+</section>
