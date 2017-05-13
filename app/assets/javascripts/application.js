@@ -25,14 +25,20 @@ $(document).ready(function(){
   $('form.fire-button').on('submit',function(e){
     e.preventDefault();
     var block = $(this).siblings('.bottom').find('.selected');
+    $form = $(this)
 
+    $.ajax({
+      url: $form.attr('action'),
+      method: $form.attr('method'),
+      data: $form.serialize()
+    })
 
     if(block.attr('class').split(' ')[1] == 'empty'){
       block.removeClass('overlay')
       block.removeClass('empty').addClass('miss');
     }
     if(block.attr('class').split(' ')[1] == 'ship'){
-       block.removeClass('overlay')
+      block.removeClass('overlay')
       block.removeClass('ship').addClass('hit');
     }
   })

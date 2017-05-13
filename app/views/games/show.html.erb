@@ -9,9 +9,10 @@
 
 
 
-<form class="fire-button">
+<form class="fire-button" method="post" action='/players/<%=@player.id%>/guess'>
   <label>Coordinates:</label>
-  <input type="text" value="">
+  <input type="hidden" name="_method" value="patch">
+  <input type="text" name="coordinates" value="">
   <button type="submit" class="fire-button">Fire</button>
 </form>
 
