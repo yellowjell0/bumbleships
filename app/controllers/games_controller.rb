@@ -5,9 +5,10 @@ class GamesController < ApplicationController
   end
   def show
     @game = Game.find(params[:id])
-    @player = @game.players.first
+    @player = @game.players.last
   end
   def create
+
     if Game.all.size == 0 || Game.last.players.count == 2
       @game = Game.create
       session[:url] = @game.id
@@ -15,7 +16,7 @@ class GamesController < ApplicationController
       @game = Game.last
     end
       @player = Player.create(player_params)
-      player1_or_player_2(@player)
+      helpers.player1_or_player2(@player)
   if @player.id
     Board.generate_player_game(@player)
     @game.players << @player

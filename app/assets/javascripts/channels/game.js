@@ -20,33 +20,22 @@ App.game = App.cable.subscriptions.create("GameChannel", {
     return $('#status').html("You have been disconnected.")
   },
   received: function(data) {
-    if (data.action === 'game start') {
-// Put board logic here
-      return $('#status').html("Game started! You play as #{data.msg}.")
-    }
+      return this.perform(data)
+  //     if (data.action === 'game start') {
+  // // Put board logic here
+  //       return $('#status').html("Game started! You play as #{data.msg}.")
     },
     message: function(message) {
       return this.perform(message)
-
     }
   });
 
 $(document).ready(function(event) {
   event.preventDefault
-  $('#game').on('submit', function(event) {
-    var input = $(this).children('input').val();
-    App.game.message(input);
+  $('.fire-button-button').on('submit', function(event) {
+    var id = $(this).attr("id");
+    App.game.message(id);
  });
-  $('.player-1').submit (function(event) {
-    var player1 = $('.player-1').addClass('hidden');
-    var player2 = $('.player-2').removeClass('hidden');
-
-  });
-  $('.player-2').submit (function(event) {
-    var player1 = $('.player-1').removeClass('hidden');
-    var player2 = $('.player-2').addClass('hidden');
-
-  });
 });
 
 

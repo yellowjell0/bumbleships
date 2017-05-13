@@ -7,14 +7,6 @@ class Player < ApplicationRecord
   has_one :board
   has_many :spaces, through: :board
 
-  def player1_or_player_2(player)
-    session[:player1] ||= @player.id
-    session[:player2] ||= @player.id
-  end
-
-  def player_form(player)
-    if player
-  end
 
   def remove_players
     session[:player1] ||= nil
