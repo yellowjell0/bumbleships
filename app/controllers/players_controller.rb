@@ -1,7 +1,6 @@
  class PlayersController < ApplicationController
  def index
   @player = Player.new
-
  end
 
  def set_fleet

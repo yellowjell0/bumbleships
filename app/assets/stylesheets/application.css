@@ -13,6 +13,11 @@
  *= require_tree .
  *= require_self
  */
+
+ .hidden {
+    visibility: hidden;
+ }
+
  .block{
     background-color: blue;
     border: 3px solid black;

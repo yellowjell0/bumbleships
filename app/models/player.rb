@@ -7,21 +7,19 @@ class Player < ApplicationRecord
   has_one :board
   has_many :spaces, through: :board
 
-  # def player_1(player)
-  #   session[:player_1] ||= player
-  # end
+  def player1_or_player_2(player)
+    session[:player1] ||= @player.id
+    session[:player2] ||= @player.id
+  end
 
-  # def player_2(player)
-  #   session[:player_2] ||= player
-  # end
+  def player_form(player)
+    if player
+  end
 
-  # def remove_player_1
-  #   session[:player_1] = nil
-  # end
-
-  # def remove_player_2
-  #   session[:player_2] = nil
-  # end
+  def remove_players
+    session[:player1] ||= nil
+    session[:player2] ||= nil
+  end
 
   def attack_spaces
     game = self.games.last
