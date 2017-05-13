@@ -9,7 +9,7 @@ class GamesController < ApplicationController
     ActionCable.server.broadcast 'game channel',
                             game: @game,
                             player_id: @player.id,
-                            board: render_board(@player)
+                            # board: render_board(@player)
   end
   def create
 
@@ -36,7 +36,7 @@ end
     @game = Game.find(params[:id])
   end
 
-  def render_board(player)
-    render partial: 'board_2_top', locals: {spaces: player.spaces.order(:coordinate)}
-  end
+  # def render_board(player)
+  #   render partial: 'board_2_top', locals: {spaces: player.spaces.order(:coordinate)}
+  # end
 end
